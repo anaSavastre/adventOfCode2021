@@ -14,6 +14,8 @@ def readFile(inFile):
                 dots.append(pointStruct(pt))
     return dots, folds
 
+# STRUCTURES 
+# Turned out to be slightly unnecessary 
 class pointStruct():
     def __init__(self, xy=[]):
         self.x=xy[0]
@@ -34,34 +36,30 @@ def output(paper):
         for point in row:
             out.write(" " if point == 0 else "#")
         out.write("\n")
-    
-def foldY(trnPaper, foldValue):
+        
+# FOLDING IN Y
+def foldY(trnPaper, y):
     n = trnPaper.height
-    y=foldValue
-    k = max(y, n-y-1)        
-    foldedPaper = paper(trnPaper.width, k)
-    for i in range(k):
+    foldedPaper = paper(trnPaper.width, y)
+    for i in range(y):
         for pointIndex in range(trnPaper.width):
             upperPoint = trnPaper.grid[i][pointIndex] 
             lowerPoint = trnPaper.grid[n-i-1][pointIndex]
             foldedPaper.grid[i][pointIndex] = upperPoint or lowerPoint
-    # output(foldedPaper.grid)   
     return foldedPaper    
-
+# FOLDING IN X
 def foldX(trnPaper, x):
     n=trnPaper.width
-    k = max(x, n-x-1)
-    foldedPaper = paper(k, trnPaper.height)
-    for i in range(k):
+    foldedPaper = paper(x, trnPaper.height)
+    for i in range(x):
         for pointIndex in range(trnPaper.height):
             upperPoint = trnPaper.grid[pointIndex][i] 
             lowerPoint = trnPaper.grid[pointIndex][n-i-1]
             foldedPaper.grid[pointIndex][i] = upperPoint or lowerPoint
     return foldedPaper
 
-
-def firstStar(points, fold):
-    
+# PART 1
+def firstStar(points, fold):    
     width = max([elem.x for elem in points])+1
     height = max([elem.y for elem in points])+1
     print(height, width)
@@ -75,14 +73,15 @@ def firstStar(points, fold):
         foldedPaper = foldY(transparentPaper, fold.value)
     else:
         foldedPaper = foldX(transparentPaper, fold.value)
+        
     # Count numberOfPoints
     result=0
     for row in foldedPaper.grid:
         result+=sum(row)
         
     return result        
-    # foldX(folded, 5)
-    
+
+# PART 2 
 def secondStar(points, folds):
     width = max([elem.x for elem in points])+1
     height = max([elem.y for elem in points])+1
@@ -101,17 +100,16 @@ def secondStar(points, folds):
             foldedPaper = foldX(paperToFold, fold.value)
         paperToFold = foldedPaper
     output(paperToFold.grid)
+    
 if __name__ =="__main__":
     dots, folds = readFile("expIn.txt")
     
     sDots, sFolds = readFile("in.txt")
-    # print("input", dots)
-    # print("folds", folds)
-    
+        
     # FIRST STAR 
     star01 = firstStar(sDots, sFolds[0])
     print("* First Star: ", star01 )
     
     # SECOND STAR 
     star02 = secondStar(sDots, sFolds)
-    # print("** First Star: ", star01 )
+    print("** Second Star: Look in output file")
