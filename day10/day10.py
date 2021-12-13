@@ -36,7 +36,7 @@ def secondStar(inData):
     openBrk='([{<'
     closedBrk=')]}>'
     scores=[]
-    for row in inData:
+    for rowNumber, row in enumerate(inData):
         openStack = []
         for bracket in row:
             # If Closed bracket
@@ -56,6 +56,8 @@ def secondStar(inData):
                 bracketPoint = openBrk.index(bracket)+1
                 completionScore = completionScore*5 + bracketPoint
             scores.append(completionScore)
+            print(rowNumber, completionScore)
+    
     scores.sort()
     return scores[len(scores)//2]
         
