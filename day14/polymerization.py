@@ -73,3 +73,4 @@ if __name__ =="__main__":
     # # STAR 2
     star02 = secondStar(srcTemplate, srcRules, 40)
     print ("PART 2: ", star02)
+    
