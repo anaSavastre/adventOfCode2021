@@ -62,7 +62,6 @@ def foldX(trnPaper, x):
 def firstStar(points, fold):    
     width = max([elem.x for elem in points])+1
     height = max([elem.y for elem in points])+1
-    print(height, width)
     # Create transparentPaper
     transparentPaper = paper(width, height)
     # Populate paper with points 
