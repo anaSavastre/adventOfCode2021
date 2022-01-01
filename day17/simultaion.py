@@ -31,15 +31,10 @@ def simulation(pointPosition=vec2(0, 0), velocity=vec2(0, 0), min=vec2(0, 0), ma
             return True
         elif (pointPosition.x > max.x) or (pointPosition.y < min.y):
             return False
-            break
-    
-    # return simulation(pointPosition, velocity, min, max)
 
 def findAllInitialVelocities(min=vec2(0, 0), max=vec2(0, 0)):
     xmin, xmax = findXIntervals(min.x, max.x)
     ymin, ymax = findYIntervals(min.y, max.y)
-    print(xmin, xmax)
-    print(ymin, ymax)
     count = 0
     for x in range(xmin, xmax+1):
         for y in range(ymin, ymax+1):

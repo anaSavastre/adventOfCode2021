@@ -9,9 +9,14 @@ def readFile(inFile):
 def firstStar(inMatrix):
     
     def getNeighbors(index):
-        c0 = index+1 if index+1 < n else None
-        c1 = ((index//width)+1)*width + (index%width) if ((index//width)+1)*width + (index%width)<n else None
-        return c0, c1 
+        i=index//width
+        j=index%width
+        c0 = i*width+(j+1) if j+1 < width else None
+        c1 = (i+1)*width+j if i+1 < height else None
+        c2 = i*width+(j-1) if j-1 > 0 else None
+        c3 = (i-1)*width+j if i-1 > 0 else None
+        print(i, j, c0, c1)
+        return c0, c1, c2, c3 
 
     def assesElementCost(index, connection0):
         i=index//width

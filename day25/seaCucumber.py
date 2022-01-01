@@ -3,9 +3,9 @@ import numpy as np
 def readFile(inFile):
 
     with open(inFile, 'r') as file:
-        txt = file.readlines()
+        txt = file.read().split("\n")
         rows = len(txt)
-        cols = len(txt[-1])-1
+        cols = len(txt[0])
         list=np.zeros([rows, cols], dtype=int)
         for i, line in enumerate(txt):
             for j, chr in enumerate(line.replace("\n", "")):
@@ -32,7 +32,7 @@ def printMap(matrix):
  
 
 def firstStar(matrix):
-    print(matrix.shape[0], matrix.shape[1])
+    # print(matrix.shape[0], matrix.shape[1])
     iteration = 0
     directions = {"E" : [0, 1], "S" : [1, 0]}
     while(True):
@@ -66,8 +66,9 @@ def firstStar(matrix):
     
 
 if __name__ =="__main__":
-    # exIn = readFile("exIn.txt")
+    exIn = readFile("exIn.txt")
     sourceIn = readFile("sourceIn.txt")
-    printMap(sourceIn)
+    # printMap(sourceIn)
+    # printMap(exIn)
 
     firstStar(sourceIn)
